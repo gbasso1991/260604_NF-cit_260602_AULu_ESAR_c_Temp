@@ -358,6 +358,47 @@ print(f'ESAR = {np.mean(SAR_M3):.2uS} W/g')
 print(f'tau = {np.mean(tau_M3):.1uS} ns')
 print(f'Hc = {np.mean(Hc_M3):.1uS} kA/m') 
 # %%
+#%% Guardar resumen de resultados
+
+# Diccionario de conversión Idc -> H0
+H0_dict = {'100dA': 38,
+    '125dA': 47,
+    '152dA': 58,}
+
+archivo_salida = 'Resumen_resultados_NFM3_260602AuLu.txt'
+
+with open(archivo_salida, 'w', encoding='utf-8') as f:
+
+    f.write(f'Muestra = {nombre_M3}\n')
+    f.write(f'Concentracion = {conc_M3:.1f} g/L\n\n')
+
+    f.write(f'{"Medición":<9}{"H0 (kA/m)":<11}{"ESAR (W/g)":<18}{"tau (ns)":<18}{"Hc (kA/m)":<18}\n')
+    f.write('-'*75 + '\n')
+
+    for i, (res, sar, tau, hc) in enumerate(zip(resultados_M3, SAR_M3, tau_M3, Hc_M3), start=1):
+
+        # Obtener H0 a partir del nombre del directorio
+        H0 = np.nan
+        for key, value in H0_dict.items():
+            if key in res:
+                H0 = value
+                break
+
+        sar_str = f'{sar:.2uS}'
+        tau_str = f'{tau:.1uS}'
+        hc_str  = f'{hc:.2uS}'
+
+        f.write(f'{i:<9}{H0:<11.0f}{sar_str:<18}{tau_str:<18}{hc_str:<18}\n')
+
+print(f'Resultados guardados en: {archivo_salida}')
+# %%
+
+
+
+
+
+
+
 
 
 
