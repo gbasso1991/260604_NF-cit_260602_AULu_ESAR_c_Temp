@@ -185,7 +185,7 @@ ciclos_M3 = glob("300_152/**/*ciclo_promedio_H_M.txt", recursive=True)
 resultados_M3 = glob("300_152/**/*resultados.txt", recursive=True)
 ciclos_M3.sort()
 resultados_M3.sort()
-conc_M3 =  20.0 
+conc_M3 =  48.1
 
 print('Importando ciclos de', nombre_M3,'\n')
 for p in ciclos_M3:
